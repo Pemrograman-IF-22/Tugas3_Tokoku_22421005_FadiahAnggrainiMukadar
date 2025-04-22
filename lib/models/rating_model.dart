@@ -1,4 +1,4 @@
-import 'package:tokokku/models/product_model.dart';
+// import 'package:tokokku/models/product_model.dart';
 
 class Rating{
   final double rate;
@@ -8,9 +8,10 @@ class Rating{
     required this.rate,
     required this.count,
   });
+
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
-      rate: (json['rate'] as num). toDouble(), 
+      rate: (json['rate'] as num).toDouble(), 
       count: json['count'], 
       );
   }
