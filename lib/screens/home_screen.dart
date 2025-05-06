@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:tokokku/models/product_model.dart';
+import 'package:tokokku/screens/detail_product_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,60 +56,69 @@ class _HomeScreenState extends State<HomeScreen> {
           itemCount: _products.length,
           itemBuilder: (context, Index){
             final product = _products[Index];
-            return Card(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 150,
-                    width: double.infinity,
-                    child: Image.network(
-                      product.image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4
-                    ),
-                    child: Text(
-                      product.category,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey
-                    )
-                    ),
-                    ),
-                    Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4
-                    ),
-                    child: Text(
-                      product.title,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+            return GestureDetector(
+              onTap: 
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailProductScreen(product: product),
                   ),
                 ),
-                    Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4
+              child: Card(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 150,
+                      width: double.infinity,
+                      child: Image.network(
+                        product.image,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    child: 
-                    Text(
-                      '\$${product.price}',
-                    style: TextStyle(
-                      color: Colors.grey
-                    )
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4
+                      ),
+                      child: Text(
+                        product.category,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey
+                      )
+                      ),
+                      ),
+                      Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4
+                      ),
+                      child: Text(
+                        product.title,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
+                      Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4
+                      ),
+                      child: 
+                      Text(
+                        '\$${product.price}',
+                      style: TextStyle(
+                        color: Colors.grey
+                      )
+                    ),
+                  ),
+                ],
+              ),
+              ),
             );
           }
         ),
